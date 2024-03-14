@@ -3,6 +3,7 @@ const fs = require("fs").promises;
 const path = require("path");
 const { rimrafSync } = require("rimraf");
 const transformer = require("./transformer/lit-ts");
+
 const options = {
   content: ["demo/**/*.html"],
   css: ["demo/**/*.css"],
@@ -10,17 +11,17 @@ const options = {
 const purger = new PurgeCSS();
 
 async function prepareOutputFolder(outputFolder, cleanOutputFolder) {
-  const exists = async () =>
+  const folderExists = async () =>
     await fs
       .access(outputFolder)
       .then(() => true)
       .catch(() => false);
 
-  if (cleanOutputFolder && (await exists())) {
+  if (cleanOutputFolder && (await folderExists())) {
     rimrafSync(outputFolder);
   }
 
-  if (!(await exists())) {
+  if (!(await folderExists())) {
     await fs.mkdir(outputFolder, { recursive: true });
   }
 }
@@ -31,28 +32,28 @@ async function bundleAndWriteCSS(
   bundleFileName,
   transformer
 ) {
-  const ext = transformer?.extension || "css";
   let bundledCSS = results.map((r) => r.css).join("\n");
   bundledCSS = transformer?.transform(bundledCSS) || bundledCSS;
+  const ext = transformer?.extension || "css";
   const outputPath = path.join(outputFolder, `${bundleFileName}.${ext}`);
   await fs.writeFile(outputPath, bundledCSS);
 }
 
 async function writeIndividualCSSFiles(results, outputFolder, transformer) {
-  const ext = transformer?.extension || "css";
   for (let result of results) {
     console.log(`Processing ${result.file}`);
+    let content = transformer?.transform(result.css) || result.css;
+    const ext = transformer?.extension || "css";
     const fileName =
       path.basename(result.file, path.extname(result.file)) + `.${ext}`;
     const outputPath = path.join(outputFolder, fileName);
-    const content = transformer?.transform(result.css) || result.css;
     await fs.writeFile(outputPath, content);
   }
 }
 
 async function purge(
-  cleanOutputFolder,
-  outputFolder,
+  cleanOutputFolder = true,
+  outputFolder = "./out",
   transformer = null,
   bundle = false,
   bundleFileName = "all"
@@ -85,4 +86,7 @@ async function purge(
 }
 
 // Example usage
-purge(true, "./out", transformer, true);
+//purge();
+//purge(true, "./out", transformer, true);
+
+module.exports = purge;

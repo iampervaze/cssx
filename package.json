@@ -14,5 +14,14 @@
   },
   "bin": {
     "cssx": "index.js"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iampervaze/cssx.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iampervaze/cssx/issues"
+  },
+  "homepage": "https://github.com/iampervaze/cssx#readme"
 }

@@ -5,8 +5,8 @@ const { rimrafSync } = require("rimraf");
 const transformer = require("./transformer/lit-ts");
 
 const options = {
-  content: ["demo/**/*.html"],
-  css: ["demo/**/*.css"],
+  content: ["**/*.html"],
+  css: ["**/*.css"],
 };
 const purger = new PurgeCSS();
 

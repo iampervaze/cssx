@@ -2,7 +2,7 @@ const { PurgeCSS } = require("purgecss");
 const fs = require("fs").promises;
 const path = require("path");
 const { rimrafSync } = require("rimraf");
-const transformer = require("./transformer/lit-ts");
+const transformer = require("./transformers/lit-ts");
 
 const options = {
   content: ["**/*.html"],

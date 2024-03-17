@@ -7,6 +7,7 @@ const transformer = require("./transformers/lit-ts");
 const options = {
   content: ["**/*.html"],
   css: ["**/*.css"],
+  skippedContentGlobs: ['node_modules/**', 'out/**']
 };
 const purger = new PurgeCSS();
 
@@ -79,7 +80,7 @@ async function purge(
       await writeIndividualCSSFiles(results, outputFolder, transformer);
     }
 
-    console.log("Purge completed successfully!");
+    console.log("Done!");
   } catch (error) {
     console.error("An error occurred during the purge process:", error);
   }

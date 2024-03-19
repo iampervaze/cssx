@@ -20,9 +20,10 @@ cssx css [options]
   -h, --help                   display help for command
 ```
 ## Demo Usage:
+- Install the package @dellteam/cssx
 - Clone this repository
-- change directory to demo folder and
-- run `cssx css -c -b all`
+- Change directory to demo folder and
+- Run `cssx css -c -b all` on your command prompt
 - Done!
   
 Your output file `all.css` containing applicable css will be available in `demo/out` folder

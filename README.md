@@ -19,6 +19,13 @@ cssx css [options]
   -t, --transform <transform>  Output file transformer to use lit/lit-ts (default: "")
   -h, --help                   display help for command
 ```
+## Demo Usage:
+- Clone this repository
+- change directory to demo folder and
+- run `cssx css -c -b all`
+- Done!
+  
+Your output file `all.css` containing applicable css will be available in `demo/out` folder
 
 ## License:
 This tool is released under the MIT license.
